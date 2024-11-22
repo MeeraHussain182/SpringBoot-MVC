@@ -1,0 +1,223 @@
+<!--  <!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Edit Product</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        /* Font styles for the entire document */
+        body {
+            background-color: #f8f9fa;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            font-size: 16px;
+            color: #333;
+        }
+
+        /* Container styling */
+        .container {
+            margin-top: 50px;
+            max-width: 600px;
+            background-color: white;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Heading font style */
+        h2 {
+            font-family: 'Georgia', serif;
+            font-size: 28px;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 30px;
+            color: #2c3e50; /* Custom dark color for the heading */
+        }
+
+        /* Label styling */
+        .form-group label {
+            font-family: 'Arial', sans-serif;
+            font-size: 16px;
+            font-weight: bold;
+            color: #8e44ad; /* Purple label color */
+        }
+
+        /* Input and textarea field styling */
+        .form-control {
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            font-weight: bold;
+            color: #2980b9; /* Custom blue font color for input fields */
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+        }
+
+        .form-control:hover {
+            background-color: #e9ecef;
+        }
+
+        /* Button styling */
+        .btn-primary, .btn-secondary {
+            font-family: 'Verdana', sans-serif;
+            font-size: 18px;
+            font-weight: bold;
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            color: white;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .btn-primary {
+            background-color: #27ae60; /* Green background for primary button */
+        }
+
+        .btn-primary:hover {
+            background-color: #2ecc71; /* Lighter green on hover */
+            transform: scale(1.05);
+        }
+
+        .btn-secondary {
+            background-color: #c0392b; /* Red background for secondary button */
+        }
+
+        .btn-secondary:hover {
+            background-color: #e74c3c; /* Lighter red on hover */
+            transform: scale(1.05);
+        }
+
+        /* Focus effects for inputs and buttons */
+        .form-control:focus {
+            border-color: #007bff;
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+        }
+
+        button:focus, a:focus {
+            outline: none;
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Edit Product</h2>
+        <form th:action="@{/update(id=${productModel.id})}" th:object="${productModel}" method="post">
+            <div class="form-group">
+                <label for="proName">Product Name</label>
+                <input type="text" id="proName" th:field="*{proName}" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="proBrand">Product Brand</label>
+                <input type="text" id="proBrand" th:field="*{proBrand}" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="proPrice">Product Price</label>
+                <input type="number" id="proPrice" th:field="*{proPrice}" class="form-control" step="0.01" required>
+            </div>
+            <div class="form-group">
+                <label for="proDescription">Product Description</label>
+                <textarea id="proDescription" th:field="*{proDescription}" class="form-control" required></textarea>
+            </div>
+            <div class="form-group">
+                <label for="proCategory">Product Category</label>
+                <select id="proCategory" th:field="*{proCategory}" class="form-control" required>
+                    <option value="" disabled>Select a category</option>
+                    <option value="Mobile">Mobile</option>
+                    <option value="Laptop">Laptop</option>
+                    <option value="Printer">Printer</option>
+                    <option value="Camera">Camera</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Update Product</button>
+            <a href="/products" class="btn btn-secondary">Cancel</a>
+        </form>
+    </div>
+
+    <script>
+        document.querySelectorAll('.form-control').forEach(input => {
+            input.addEventListener('mouseover', function() {
+                this.style.backgroundColor = '#f1f1f1';
+            });
+            input.addEventListener('mouseout', function() {
+                this.style.backgroundColor = '';
+            });
+        });
+
+        document.querySelectorAll('.btn').forEach(button => {
+            button.addEventListener('mouseover', function() {
+                this.style.transform = 'scale(1.1)';
+            });
+            button.addEventListener('mouseout', function() {
+                this.style.transform = 'scale(1)';
+            });
+        });
+    </script>
+</body>
+</html>-->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Edit Product</title>
+    <!-- Bootstrap CDN -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container mt-5">
+    <h2>Edit Product</h2>
+
+<form th:action="@{/update(id=${id})}" th:object="${productModel}" method="post" >
+    
+    <div class="form-group">
+        <label for="proName">Product Name</label>
+        <input type="text" th:field="*{proName}" class="form-control" id="proName">
+    </div>
+    <div class="form-group">
+        <label for="proBrand">Brand</label>
+        <input type="text" th:field="*{proBrand}" class="form-control" id="proBrand">
+    </div>
+    <div class="form-group">
+        <label for="proPrice">Price</label>
+        <input type="number" th:field="*{proPrice}" class="form-control" id="proPrice">
+    </div>
+    
+    
+    <div class="form-group">
+    <label for="proCategory">Product Category</label>
+    <select th:field="*{proCategory}" class="form-control" id="proCategory" required>
+        <option value="" disabled>Select Category</option>
+        <option th:each="category : ${categories}" 
+                th:value="${category}" 
+                th:text="${category}">
+        </option>
+    </select>
+</div>
+    
+    <div class="form-group">
+        <label for="proDescription">Description</label>
+        <textarea th:field="*{proDescription}" class="form-control" id="proDescription"></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary">Update Product</button>
+</form>
+
+</div>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

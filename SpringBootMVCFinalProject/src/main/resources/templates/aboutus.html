@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us</title>
+
+    <!-- Bootstrap CDN for base styling -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    
+    <style>
+        /* Global styling */
+        body {
+            font-family: 'Helvetica', sans-serif;
+            background-color: #f4f7f6;
+            color: #333;
+            padding: 20px;
+        }
+
+        h1, h2 {
+            color: #2c3e50;
+            font-weight: 700;
+        }
+
+        p, li, a {
+            color: #555;
+            font-size: 16px;
+        }
+
+        a {
+            color: #3498db;
+            text-decoration: none;
+        }
+
+        a:hover {
+            color: #1abc9c;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .mb-4 {
+            margin-bottom: 30px;
+        }
+
+        ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        ul li {
+            background-color: #eaf2f8;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+        }
+
+        .form-group label {
+            color: #34495e;
+        }
+
+        .btn-primary {
+            background-color: #3498db;
+            border-color: #3498db;
+        }
+
+        .btn-primary:hover {
+            background-color: #2980b9;
+            border-color: #2980b9;
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="container mt-5"  th:fragment="content">
+    <h1>About Us</h1>
+
+    <!-- Company Overview -->
+    <div class="mb-4">
+        <h2>Our Company</h2>
+        <p>
+            We are dedicated to providing top-quality products that enhance the lives of our customers. Our commitment to innovation and excellence ensures that we stay ahead in the industry.
+        </p>
+    </div>
+
+    <!-- Vision Statement -->
+    <div class="mb-4">
+        <h2>Our Vision</h2>
+        <p th:text="${visionStatement}">
+            <!-- Default vision statement -->
+            To be a leader in our field, offering reliable and innovative solutions that meet the needs of our customers.
+        </p>
+    </div>
+
+    <!-- Core Values -->
+    <div class="mb-4">
+        <h2>Our Core Values</h2>
+        <ul>
+            <li th:each="value : ${coreValues}">
+                <span th:text="${value}">Customer Satisfaction</span>
+            </li>
+        </ul>
+    </div>
+
+    <!-- Contact Information -->
+    <div class="mb-4">
+        <h2>Contact Us</h2>
+        <p>
+            Have any questions? Reach out to us at 
+            <a th:href="'mailto:' + ${contactEmail}" th:text="${contactEmail}">support@company.com</a>.
+        </p>
+    </div>
+
+    <!-- Feedback Form (optional) -->
+    <div class="mb-4">
+        <h2>Send Us a Message</h2>
+        <form th:action="@{/submitFeedback}" method="post">
+            <div class="form-group">
+                <label for="name">Your Name</label>
+                <input type="text" id="name" name="name" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="message">Your Message</label>
+                <textarea id="message" name="message" class="form-control" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Product List</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f2f6fc;
+            margin: 20px;
+            color: #333;
+        }
+
+        h1 {
+            text-align: center;
+            color: #343a40;
+            font-size: 2.8rem;
+            margin-bottom: 20px;
+            letter-spacing: 1px;
+            font-weight: bold;
+            text-transform: uppercase;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+
+        h1::after {
+            content: "";
+            display: block;
+            width: 150px;
+            height: 4px;
+            background-color: #007bff;
+            margin: 10px auto 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
+            margin-top: 20px;
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+            transition: background-color 0.3s ease;
+        }
+
+        th {
+            background-color: #007bff;
+            color: white;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            letter-spacing: 0.05em;
+        }
+
+        tr {
+            transition: transform 0.2s ease, background-color 0.3s ease;
+        }
+
+        tr:hover {
+            background-color: #eef2fb;
+            transform: scale(1.02);
+        }
+
+        td {
+            font-size: 0.95rem;
+            color: #333;
+        }
+
+        .btn {
+            padding: 8px 12px;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            text-decoration: none;
+            margin-right: 5px;
+            display: inline-block;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        .btn-danger {
+            background-color: #dc3545;
+            color: white;
+        }
+
+        .btn-danger:hover {
+            background-color: #c82333;
+            transform: scale(1.05);
+        }
+
+        .btn-warning {
+            background-color: #ffc107;
+            color: white;
+        }
+
+        .btn-warning:hover {
+            background-color: #e0a800;
+            transform: scale(1.05);
+        }
+
+        .btn-sm {
+            font-size: 0.85rem;
+            padding: 6px 10px;
+        }
+
+        @media (max-width: 768px) {
+            table, thead, tbody, th, td, tr {
+                display: block;
+                width: 100%;
+            }
+
+            thead tr {
+                display: none;
+            }
+
+            tr {
+                margin-bottom: 15px;
+            }
+
+            td {
+                text-align: right;
+                padding-left: 50%;
+                position: relative;
+            }
+
+            td:before {
+                content: attr(data-label);
+                position: absolute;
+                left: 0;
+                padding-left: 15px;
+                font-weight: bold;
+                text-transform: uppercase;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Define the fragment for the product table -->
+    <div th:fragment="productTable">
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Product Name</th>
+                    <th>Price</th>
+                    <th>Brand</th>
+                    <th>Description</th>
+                    <th>Discounted Price</th>
+                    <th>Category</th>
+                    <th>Created At</th>
+                    <th>Created By</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Iterate over the products list using Thymeleaf -->
+                <tr th:each="product : ${products}">
+                    <td th:text="${product.id}" data-label="ID">1</td>
+                    <td th:text="${product.proName}" data-label="Product Name">Sample Product</td>
+                    <td th:text="${product.proPrice}" data-label="Price">100.00</td>
+                    <td th:text="${product.proBrand}" data-label="Brand">BrandName</td>
+                    <td th:text="${product.proDescription}" data-label="Description">Product Description</td>
+                    <td th:text="${product.disPrice}" data-label="Discounted Price">80.00</td>
+                    <td th:text="${product.proCategory}" data-label="Category">CategoryName</td>
+                    <td th:text="${product.createdAt}" data-label="Created At">2024-01-01</td>
+                    <td th:text="${product.createdBy}" data-label="Created By">Admin</td>
+                    <td data-label="Action">
+                        <a th:href="@{/delete(id=${product.id})}" class="btn btn-danger btn-sm"
+                           onclick="return confirm('Are you sure you want to delete this product?');">
+                           Delete
+                        </a>
+                        <a th:href="@{/update(id=${product.id})}" class="btn btn-warning btn-sm"
+                           onclick="return confirm('Are you sure you want to edit this product?');">Edit</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Include the product table fragment in your main page -->
+    <div th:replace="~{::productTable}"></div>
+
+</body>
+</html>
